@@ -40,7 +40,7 @@ const Footer = () => {
                 placeholder="Email"
                 type="text"
                 name="text"
-                class="bg-transparent text-[#f4f4f5] px-3 py-1 rounded-l-lg focus:outline-none w-full"
+                className="bg-transparent text-[#f4f4f5] px-3 py-1 rounded-l-lg focus:outline-none w-full"
             />
             <img className='cursor-pointer active:scale-125 transition-transform duration-300' width={25} src='/Icons/mail.png' />
             </div>

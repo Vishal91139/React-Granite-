@@ -1,8 +1,8 @@
 import React from 'react'
 import '../stylesheet/product.css'
 import Product_box from '../components/Product_box'
-import { products } from '../../public/Data/ProductD'
 import { NavLink } from 'react-router-dom'
+import { products } from '../../public/Data/productd'
 
 const Product_page = () => {
   return (
