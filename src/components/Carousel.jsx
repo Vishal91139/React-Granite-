@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "../stylesheet/carousel.css";
 
 const Carousel = ({images}) => {
@@ -14,6 +14,30 @@ const Carousel = ({images}) => {
   
 
   const [current, setcurrent] = useState(0);
+  const [autoPlay, setautoPlay] = useState(true);
+  const carouselRef = useRef(null);
+  let timeOut = null
+
+  useEffect(()=>{
+    timeOut = autoPlay && setTimeout(()=> {
+      slide_right();
+    },2500)
+  })
+
+  useEffect(()=>{
+    const observer = new IntersectionObserver(([entry]) => {
+      setautoPlay(entry.isIntersecting);
+    },{threshold:0.5});
+    
+    if(carouselRef.current){
+      observer.observe(carouselRef.current);
+    }
+    return()=>{
+      if(carouselRef.current){
+        observer.unobserve(carouselRef.current);
+      }
+    };
+  },[]);
 
   const slide_left = () => {
     setcurrent(current === 0 ? images.length-1 : current-1);
@@ -40,7 +64,7 @@ const Carousel = ({images}) => {
   // }
 
   return (
-    <div className='carousel'>
+    <div className='carousel' ref={carouselRef}>
       <div className='carousel_wrapper'>
         {optimizedImages.map((image, index)=>{
           return (
@@ -55,7 +79,7 @@ const Carousel = ({images}) => {
           </div>
           );
         })}
-        <div id='carousel_button'>
+        <div id='carousel_button' onClick={() => {setautoPlay(false); clearTimeout(timeOut);setautoPlay(true)}} >
           <div className='carousel_arrow_left' onClick={slide_left}>&lsaquo;</div>
           <div className='carousel_arrow_right' onClick={slide_right}>&rsaquo;</div>
         </div>
@@ -64,6 +88,7 @@ const Carousel = ({images}) => {
             return (
               <div key={index}
                 className={index==current ? "pagination_dot pagination_dot-active" : "pagination_dot"}
+                onClick={()=>setcurrent(index)}
               ></div>
             );
           })}

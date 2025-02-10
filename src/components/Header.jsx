@@ -6,26 +6,26 @@ const Header = () => {
   return (
     <div className='navBar flex items-center justify-between w-[70%] left-56 mt-5 rounded-full fixed z-50'>
         <div className='flex items-center w-[30%] p-2.5 justify-center '>
-            <h4 className='text-center'>VIKAASH EXPORTS</h4>
+            <h4 className='text-center '>VIKAASH EXPORTS</h4>
         </div>
         <ul className='flex justify-between w-[45%] items-center'>
           <li>
             <NavLink to="/" className={({isActive}) =>
-              `${isActive ? "text-orange-700" : "text-black"} flex-grow text-lg tetx-center`
+              `${isActive ? "text-orange-700" : "text-white"} flex-grow text-lg tetx-center `
             }>
               Home
             </NavLink>
           </li>
           <li>
             <NavLink to="/About" className={({isActive}) =>
-              `${isActive ? "text-orange-700" : "text-black"} flex-grow text-lg tetx-center`
+              `${isActive ? "text-orange-700" : "text-white"} flex-grow text-lg tetx-center`
             }>
               About us
             </NavLink>
           </li>
           <li>
             <NavLink to="/Products" className={({isActive}) =>
-              `${isActive ? "text-orange-700" : "text-black"} flex-grow text-lg tetx-center`
+              `${isActive ? "text-orange-700" : "text-white"} flex-grow text-lg tetx-center`
             }>
               Products
             </NavLink>

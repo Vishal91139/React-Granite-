@@ -22,7 +22,7 @@ const Home_page = () => {
           <p className='text-lg'>At Vikaash Exorts, we are passionate about natural stone. Our journey began with a vision to bring the finest granite from the heart of nature to homes, commercial spaces, and architectural projects around the world. Over the years, we have built a strong reputation for excellence, sourcing the highest quality granite from the best quarries and processing it with state-of-the-art technology.</p>
         </li>
       </ul>
-      <div className='w-screen mt-10 h-[80vh] bg-gray-50'>
+      <div className='mt-10 h-[80vh] bg-gray-50'>
         <div className='bg-amber-200 flex items-center rounded-2xl justify-between h-[18%] py-14 px-20'>
           <h1 className='text-6xl font-bold'>Products</h1>
           <p className='text-lg text-end pr-8'>We offer an extensive range of granite products in various colors, patterns<br/> and finishes to suit diverse design and construction needs. </p>

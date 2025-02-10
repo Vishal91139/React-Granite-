@@ -5,5 +5,6 @@
 }
 
 .navBar {
-    background-color: rgb(24, 255, 28);
+    border: 4;
+    background: linear-gradient(rgb(242, 143, 61),rgb(226, 143, 0));
 }
