@@ -15,11 +15,12 @@ const Carousel = ({images}) => {
 
   const [current, setcurrent] = useState(0);
   const [autoPlay, setautoPlay] = useState(true);
-  const [opacity, setOpacity] = useState(1);
+  const [opacity, setOpacity] = useState(0);
   const [hovered, setHovered] = useState(false);
   const carouselRef = useRef(null);
-  let timeOutCarousel = null;
-  let timeOutControls = null;
+
+  const timeOutCarousel = useRef(null);
+  const timeOutControls = useRef(null);
 
   useEffect(()=>{
     const observer = new IntersectionObserver(([entry]) => {
@@ -34,31 +35,46 @@ const Carousel = ({images}) => {
         observer.unobserve(carouselRef.current);
       }
     };
-  },[]);
+  },[ carouselRef ]);
 
-  const slide_left = () => {
+  const slide_left = async () => {
     setcurrent(current === 0 ? images.length-1 : current - 1);
   }
-  const slide_right = () => {
+  const slide_right = async () => {
     setcurrent(current === images.length-1 ? 0 : current + 1);
   }
 
   const showControls = () => {
     setOpacity(1);
-    clearTimeout(timeOutControls);
+    clearTimeout(timeOutControls.current);
     if(!hovered){
-      timeOutControls = setTimeout(()=>{
+      timeOutControls.current = setTimeout(()=>{
       setOpacity(0);
       },3000)
     }
   }
 
-  useEffect(()=>{
-    timeOutCarousel = autoPlay && setTimeout(() => {
-      slide_right();
-    },3000)
-    setautoPlay(true);
-  })
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeOutCarousel.current);
+      clearTimeout(timeOutControls.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (autoPlay && mounted) {
+      timeOutCarousel.current = setTimeout(() => {
+        slide_right();
+      }, 3500);
+    }
+
+    return () => {
+      mounted = false;
+      clearTimeout(timeOutCarousel.current);
+    };
+  }, [autoPlay, current]);
 
   return (
     <div className='carousel' ref={carouselRef} onMouseMove={()=>{showControls()}} >
@@ -78,8 +94,8 @@ const Carousel = ({images}) => {
         })}
         <div id='carousel_button'
          style={{opacity:opacity}} onMouseEnter={()=>{setHovered(true);clearTimeout(timeOutControls);showControls()}} onMouseLeave={()=>{setHovered(false)}}>
-          <div className='carousel_arrow_left' onClick={() => {slide_left();setautoPlay(false);clearTimeout(timeOutCarousel);}}>&lsaquo;</div>
-          <div className='carousel_arrow_right' onClick={() => {setautoPlay(false);clearTimeout(timeOutCarousel);slide_right()}}>&rsaquo;</div>
+          <div className='carousel_arrow_left' onClick={() => {clearTimeout(timeOutCarousel.current);slide_left();setTimeout(()=>setautoPlay(true),0)}}>&lsaquo;</div>
+          <div className='carousel_arrow_right' onClick={() => {clearTimeout(timeOutCarousel.current);slide_right();setTimeout(()=>setautoPlay(true),0)}}>&rsaquo;</div>
         </div>
         <div className='carousel_pagination'>
           {images.map((_,index)=>{
