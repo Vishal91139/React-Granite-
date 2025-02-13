@@ -8,3 +8,20 @@
     border: 4;
     background: linear-gradient(rgb(242, 143, 61),rgb(226, 143, 0));
 }
+
+@media screen and (max-width: 768px) {
+    .navBar {
+        width: 100%;
+        left: 0;
+        padding: 0 1rem;
+    }
+
+    .navBar h4 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Add transition for mobile menu */
+.navBar ul {
+    transition: all 0.3s ease-in-out;
+}
