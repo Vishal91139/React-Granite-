@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { products } from '../../public/Data/productd'
 
 const Product_page = () => {
+
   return (
     <div>
         <div className='w-full h-[50vh] relative flex'>
@@ -30,7 +31,7 @@ const Product_page = () => {
                 </ul>
             </div>
         </div>
-        <div className='mt-15'>
+        <div className=' mt-15 '>
             <Product_box products={products} />
         </div>
     </div>

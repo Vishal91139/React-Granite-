@@ -113,7 +113,7 @@ const Carousel = ({images}) => {
     .to(carouselRef.current, {
       opacity: 1,
       scale:1,
-      duration: 1.4,
+      duration: 1.2,
       ease: "power3.out"
     });
 
